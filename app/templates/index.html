@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Flask</title>
+</head>
+<body>
+    <div>   
+        <h3>Projeto Flesk</h3>
+        <h5>@senaisc</h5>
+    </div>
+    <div>   
+        <p> Bem vindo {{context.usuario}} a aula de flask </p>
+        <p> Idade: {{context.idade}}</p>
+
+        <a href="{{url_for('contato')}}">Contato</a>
+        <a href="{{url_for('contatoLista')}}">Contato - Lista</a>
+
+    </div>
+    
+</body>
+</html>
