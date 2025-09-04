@@ -1,23 +1,40 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Flask</title>
-</head>
-<body>
-    <div>   
-        <h3>Projeto Flesk</h3>
-        <h5>@senaisc</h5>
-    </div>
-    <div>   
-        <p> Bem vindo {{context.usuario}} a aula de flask </p>
-        <p> Idade: {{context.idade}}</p>
+{% extends "base.html" %}
 
-        <a href="{{url_for('contato')}}">Contato</a>
-        <a href="{{url_for('contatoLista')}}">Contato - Lista</a>
+{% include "nav.html" %}
 
-    </div>
-    
-</body>
-</html>
+{% block content %}
+<hr>
+<div class="">
+    <h5>Bem vindo, {{context.usuario}}</h5>
+    <p>Sua idade: {{context.idade}}</p>
+    <hr>
+
+    {% if current_user.is_authenticated %}
+    <span class="btn btn-primary">{{current_user.nome}} {{current_user.sobrenome}}</span>
+    <a href="{{url_for('logout')}}" class="btn btn-danger">Sair</a>
+    {% else %}
+
+    <form action="" method="post" class="row mt-4 p-4 round border shadow">
+        <h3>Faça o seu Login</h3>
+        {{form.csrf_token}}
+
+        {{form.email.label(class="mt-3")}}
+        {{form.email(class="form-control")}}
+
+        {{form.senha.label(class="mt-3")}}
+        {{form.senha(class="form-control")}}
+
+        {{form.btnSubmit(class="btn btn-primary col-12 mt-4")}}
+
+        <div class="col-12  mt-4">Não tem cadastro? <a href="{{url_for('cadastroUsuario')}}"
+                class="btn btn-primary">Faça o seu cadastro</a></div>
+    </form>
+
+
+    {% endif %}
+    <br>
+
+    <img src="{{url_for('static', filename='img/senai.jpg')}}">
+</div>
+
+{% endblock %}
